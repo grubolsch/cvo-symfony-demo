@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  php:
+    image: php:8.3-fpm
+    container_name: php-cvo-symfony
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app:/var/www/html
+      - ./php.ini:/usr/local/etc/php/php.ini # Optional: Custom PHP configuration
+    depends_on:
+      - mysql
+    command: php -S 0.0.0.0:80 -t /var/www/html # Run built-in PHP server for simplicity
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-cvo-symfony
+    ports:
+      - "3311:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: symfony_demo
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
