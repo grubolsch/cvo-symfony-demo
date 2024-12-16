@@ -41,4 +41,12 @@ class CarController extends AbstractController
 
         return new JsonResponse($cars);
     }
+
+    #[Route('/car/view/{id}', name: 'app_car_view')]
+    public function view(CarRepository $carRepository, string $id): Response
+    {
+        $car = $carRepository->find($id);
+
+        return new JsonResponse($car);
+    }
 }
