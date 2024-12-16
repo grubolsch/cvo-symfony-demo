@@ -29,8 +29,8 @@ class CarController extends AbstractController
         ]);
     }
 
-    #[Route('/car/view', name: 'app_car_view')]
-    public function view(CarRepository $carRepository): Response
+    #[Route('/car/viewall', name: 'app_car_viewall')]
+    public function viewall(CarRepository $carRepository): Response
     {
         $cars = $carRepository->findAll();
 
@@ -39,10 +39,6 @@ class CarController extends AbstractController
             //echo '<br>';
         }
 
-        // use Symfony\Component\HttpFoundation\JsonResponse;
-        return new JsonResponse([
-            'naam' => 'Koen',
-            'age' => 36
-        ]);
+        return new JsonResponse($cars);
     }
 }
