@@ -49,4 +49,16 @@ class CarController extends AbstractController
 
         return new JsonResponse($car);
     }
+
+    #[Route('/car/view2/{car}', name: 'app_car_view2')]
+    public function view2(EntityManagerInterface $em, Car $car): Response
+    {
+        $car->setBuildyear(2010);
+        $car->setColor('Paars');
+
+        $em->remove($car);
+        $em->flush();
+
+        return new JsonResponse($car);
+    }
 }
